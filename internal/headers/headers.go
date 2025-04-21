@@ -21,7 +21,7 @@ func Generate(filename string) error {
 	}
 	defer file.Close()
 
-	clearName := strings.TrimSuffix(filename, filepath.Ext(filename))
+	clearName := strings.TrimSuffix(filepath.Base(filename), filepath.Ext(filename))
 
 	headerFileName := clearName + ".h"
 	headerFile, err := os.Create(headerFileName)
@@ -57,6 +57,7 @@ func Generate(filename string) error {
 	return nil
 }
 
+// TODO: стоит сделать не по строкам а по блокам
 func parseLine(line string) (string, error) {
 	if strings.HasPrefix(line, "#include") || strings.HasPrefix(line, "#define") {
 		return line, nil
