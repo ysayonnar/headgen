@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	filesvalidator "headgen/internal/files-validator"
+	"headgen/internal/headers"
 	"os"
 )
 
@@ -13,5 +14,11 @@ func main() {
 		return
 	}
 
-	fmt.Printf("Provided files: %s", fileNames)
+	for _, fileName := range fileNames {
+		err = headers.Generate(fileName)
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+	}
 }
